@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color: #334E68;
+  --secondary-color: #3B82F6;
+  --accent-light: #DDE6ED;
+  --accent-soft: #DBEAFE;
+  --bg-light: #F0F4F8;
+  --bg-lighter: #FFFFFF;
+  --text-dark: #1E293B;
+  --circle-size: 200px;
+  --subcircle-width: 180px;
+  --subcircle-height: 80px;
+  --product-card-width: 350px;
+  --product-image-height: 250px;
+  --pill-padding-vertical: 8px;
+  --pill-padding-horizontal: 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root, .app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+}
+
+.header {
+  background: var(--primary-color);
+  color: var(--bg-lighter);
+  padding: 2rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: var(--bg-lighter);
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background: var(--secondary-color);
+}
+
+.main-content {
+  flex: 1;
+  padding: 3rem;
+}
+
+/* Стиль больших кружков */
+.circle {
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+  padding: 1.5rem;
+}
+
+.circle:hover {
+  transform: scale(1.05);
+  background: var(--accent-soft);
+}
+
+.circle.selected {
+  background: var(--secondary-color);
+  color: var(--bg-lighter);
+}
+
+.footer {
+  background: var(--primary-color);
+  color: var(--bg-lighter);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 1rem;
+}

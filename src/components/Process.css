@@ -1,0 +1,132 @@
+/********************** Process.css (Accordion) ********************/
+:root {
+  /* тема */
+  --aw-line: rgba(2,6,23,.12);
+  --aw-accent-a: #06b6d4;
+  --aw-accent-b: #0ea5e9;
+  --aw-success: #10b981;
+  /* анимации */
+  --acc-dur: 720ms;
+  --acc-ease: cubic-bezier(.22,.8,.24,1);
+}
+
+/* Общий прогресс + кнопки */
+.overall-progress { display: grid; grid-template-columns: 110px 1fr auto; gap: .75rem; align-items: center; margin-bottom: 1rem; }
+.progress-label { font-weight: 600; font-size: .95rem; }
+.progress-track { position: relative; height: 8px; border-radius: 999px; background: rgba(2,6,23,.08); overflow: hidden; box-shadow: inset 0 1px 2px rgba(2,6,23,.1); }
+.progress-fill { position: absolute; inset: 0 100% 0 0; background: linear-gradient(90deg, var(--aw-accent-a), var(--aw-accent-b)); box-shadow: 0 0 12px rgba(14,165,233,.35); }
+.acc-controls { display: inline-flex; gap: .5rem; flex-wrap: wrap; }
+.acc-btn { border: 1px solid var(--aw-line); background: #fff; padding: .45rem .7rem; border-radius: 10px; font-weight: 600; cursor: pointer; }
+.acc-btn:hover { background: #f0f9ff; }
+.acc-btn--danger { border-color: rgba(220,38,38,.35); color: #b91c1c; }
+.acc-btn--danger:hover { background: #fef2f2; }
+.acc-btn { border: 1px solid var(--aw-line); background: #fff; padding: .45rem .7rem; border-radius: 10px; font-weight: 600; cursor: pointer; }
+.acc-btn:hover { background: #f0f9ff; }
+
+/* Контейнер аккордеона */
+.accordion.theme-autowash { border: 1px solid var(--aw-line); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 6px 18px rgba(2,6,23,.06); }
+
+/* Вступительный блок */
+.intro-card { display: grid; grid-template-columns: 36px 1fr; gap: .75rem; align-items: start; padding: .9rem 1rem; margin-bottom: .9rem; border: 1px solid var(--aw-line); border-radius: 12px; background: linear-gradient(180deg, rgba(240,249,255,.9), rgba(255,255,255,.8)); box-shadow: 0 4px 14px rgba(2,6,23,.06); }
+.intro-left .icon { color: #0ea5e9; }
+.intro-title { margin: 0 0 .25rem 0; font-size: 1.05rem; font-weight: 800; letter-spacing: .01em; }
+.intro-steps { margin: 0; padding-left: 1.1rem; }
+.intro-steps li { margin: .2rem 0; }
+
+/* Элемент */
+.acc-item + .acc-item { border-top: 1px solid var(--aw-line); }
+
+/* Заголовок (горизонтальная вкладка) */
+.acc-header { width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .75rem; padding: .9rem 1rem; background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.7)); border: none; cursor: pointer; text-align: left; }
+.acc-header:hover { background: #f8fbff; }
+.acc-header.open { box-shadow: inset 0 -1px 0 rgba(2,6,23,.06); }
+
+.acc-left { display: inline-flex; align-items: center; gap: .6rem; }
+.acc-title { font-weight: 700; letter-spacing: .01em; }
+.acc-badge { font-weight: 700; font-size: .85rem; color: #0369a1; background: #e0f2fe; padding: .2rem .5rem; border-radius: 999px; border: 1px solid #bae6fd; }
+.acc-badge.done { color: #065f46; background: #d1fae5; border-color: #a7f3d0; }
+
+.acc-chevron { width: 24px; height: 24px; display: grid; place-items: center; transition: transform var(--acc-dur) var(--acc-ease); }
+.acc-chevron.rot { transform: rotate(180deg); }
+
+/* Панель — плавный slide top→down, без jank (grid-tracks trick) */
+.acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--acc-dur) var(--acc-ease), padding var(--acc-dur) var(--acc-ease); padding: 0 1rem; background: linear-gradient(180deg, rgba(240,249,255,.6), rgba(255,255,255,.8)); }
+.acc-panel.open { grid-template-rows: 1fr; padding: .6rem 1rem 1rem 1rem; }
+.acc-panel-inner { overflow: hidden; }
+
+/* Чек-лист */
+.tasks { display: flex; flex-direction: column; gap: .6rem; list-style: none; padding: 0; margin: 0; }
+.task { display: grid; grid-template-columns: 26px 28px 1fr auto; align-items: start; gap: .6rem; padding: .6rem .75rem; border: 1px solid var(--aw-line); border-radius: 10px; background: rgba(255,255,255,.88); box-shadow: 0 2px 8px rgba(2,6,23,.04); transition: background 180ms ease, border-color 180ms ease, transform 120ms ease; cursor: pointer; }
+.task:hover { transform: translateY(-1px); }
+.task.done { background: linear-gradient(180deg, rgba(240,253,244,.95), rgba(240,253,244,.75)); border-color: rgba(16,185,129,.35); }
+
+/* Таблица деталей подпункта */
+.task-panel { grid-column: 1 / -1; display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--acc-dur) var(--acc-ease), padding var(--acc-dur) var(--acc-ease); padding: 0; }
+.task-panel.open { grid-template-rows: 1fr; padding: .4rem 0 0 0; }
+.task-panel-inner { overflow: hidden; }
+.task-details { margin-top: 0; }
+.task-grid { display: grid; grid-template-columns: minmax(280px,1.2fr) 1.6fr; gap: .8rem; padding: .6rem .6rem .2rem; border: 1px dashed var(--aw-line); border-radius: 10px; background: rgba(240,249,255,.55); align-items: start; }
+.tg-col { display: grid; grid-template-rows: auto 1fr; gap: .35rem; min-width: 0; }
+.tg-title { font-size: .8rem; font-weight: 800; letter-spacing: .02em; color: #0369a1; text-transform: uppercase; }
+.tg-value { line-height: 1.45; }
+
+/* Переключатель подпункта */
+.task-toggle { width: 28px; height: 28px; display: grid; place-items: center; border: none; background: transparent; cursor: pointer; border-radius: 8px; transition: transform var(--acc-dur) var(--acc-ease), background 180ms ease; }
+.task-toggle:hover { background: #eff6ff; }
+.task-toggle.open { transform: rotate(180deg); }
+
+/* Подсказка «Подробнее» */
+.task-hint { justify-self: end; display: inline-flex; align-items: center; gap: .35rem; padding: .18rem .55rem; border-radius: 999px; font-weight: 700; font-size: .82rem; color: #0284c7; background: #eff6ff; border: 1px solid #bae6fd; transition: background 180ms ease, color 180ms ease; }
+.task-hint.open { color: #0f766e; background: #ecfdf5; border-color: #a7f3d0; }
+.task-hint-chev { width: 20px; height: 20px; display: grid; place-items: center; transition: transform var(--acc-dur) var(--acc-ease); }
+.task-hint.open .task-hint-chev { transform: rotate(180deg); }
+
+/* Переключатель способа воды */
+.method-switch { display: flex; gap: .5rem; flex-wrap: wrap; margin: .25rem 0 .6rem; }
+.method-btn { border: 1px solid var(--aw-line); background: #fff; padding: .35rem .6rem; border-radius: 999px; font-weight: 700; cursor: pointer; }
+.method-btn.on { background: #e0f2fe; border-color: #bae6fd; color: #0369a1; }
+
+/* Продукты */
+.tg-products { min-width: 0; overflow: hidden; }
+.tg-products-wrap { display: flex; flex-wrap: wrap; gap: .6rem; align-items: stretch; max-width: 100%; }
+.product-card { display: grid; grid-template-columns: 44px 1fr; gap: .6rem; align-items: center; padding: .5rem .55rem; border: 1px solid var(--aw-line); border-radius: 10px; background: #fff; box-shadow: 0 1px 4px rgba(2,6,23,.06); min-width: 0; flex: 1 1 180px; max-width: 260px; }
+.pimg { width: 44px; height: 44px; border-radius: 8px; background: linear-gradient(135deg, #e0f2fe, #bae6fd); box-shadow: inset 0 0 0 2px rgba(2,6,23,.05); }
+.pinfo { display: grid; gap: .15rem; }
+.pname { font-weight: 700; font-size: .92rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ptag { font-size: .78rem; color: #0369a1; }
+
+/* PDF правила */
+.tg-rules { min-width: 0; }
+.pdf-card { display: grid; grid-template-columns: 28px 1fr 24px; align-items: center; gap: .6rem; padding: .6rem .7rem; border: 1px solid var(--aw-line); border-radius: 10px; background: #fff; box-shadow: 0 1px 4px rgba(2,6,23,.06); text-decoration: none; color: inherit; }
+.pdf-card:hover { background: #f0f9ff; }
+.pdf-icon .icon { color: #ef4444; }
+.pdf-info { display: grid; gap: .1rem; min-width: 0; }
+.pdf-name { font-weight: 700; font-size: .95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pdf-meta { font-size: .78rem; color: #0369a1; }
+.pdf-download .icon { color: #0284c7; }
+.pdf-note { margin-top: .4rem; font-size: .9rem; color: #334155; }
+
+/* Центрирование основного контента */
+.process { padding: 1rem; }
+.process-wrap { width: min(100%, 1100px); margin: 0 auto; display: grid; gap: 1rem; }
+.section-title { text-align: center; margin: .25rem 0 .5rem; }
+
+
+.icon { color: #0284c7; }
+.check { width: 24px; height: 24px; border-radius: 6px; border: 2px solid rgba(2,6,23,.2); background: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background 180ms ease, border-color 180ms ease, transform 120ms ease; }
+.check:hover { transform: scale(1.04); }
+.check.checked { background: linear-gradient(180deg, #34d399, #10b981); border-color: #10b981; }
+.check-mark { width: 12px; height: 6px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); opacity: 0; transition: opacity 160ms ease; }
+.check.checked .check-mark { opacity: 1; }
+
+.task-label { user-select: none; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) { :root { --acc-dur: 0ms; } }
+
+/* Responsive tweaks */
+@media (max-width: 1100px) {
+  .task-grid { grid-template-columns: 1fr; }
+  .tg-products-wrap { gap: .6rem; }
+  .product-card { flex: 1 1 160px; max-width: 100%; }
+}
